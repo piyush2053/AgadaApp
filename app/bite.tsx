@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const organisms = [
   { key: "snake", label: "Snake", sub: "Sarpa", icon: "pest-control-rodent" },
@@ -23,95 +24,102 @@ export default function Bite() {
   const [selected, setSelected] = useState("snake");
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
-        <Text style={styles.breadcrumb}>ASSESS › BITE TYPE</Text>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
+      <View style={{ flex: 1 }}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={styles.breadcrumb}>ASSESS › BITE TYPE</Text>
 
-        <Text style={styles.title}>
-          Identify the{" "}
-          <Text style={{ color: "#6B7280" }}>Organism</Text>
-        </Text>
+          <Text style={styles.title}>
+            Identify the{" "}
+            <Text style={{ color: "#6B7280" }}>Organism</Text>
+          </Text>
 
-        <Text style={styles.subtitle}>
-          Select the source of toxic exposure for clinical diagnosis.
-        </Text>
+          <Text style={styles.subtitle}>
+            Select the source of toxic exposure for clinical diagnosis.
+          </Text>
 
-        <View style={styles.grid}>
-          {organisms.map((item) => {
-            const isSelected = selected === item.key;
-            return (
-              <TouchableOpacity
-                key={item.key}
-                style={[
-                  styles.card,
-                  isSelected && styles.cardSelected,
-                ]}
-                onPress={() => setSelected(item.key)}
-              >
-                <View
+          <View style={styles.grid}>
+            {organisms.map((item) => {
+              const isSelected = selected === item.key;
+              return (
+                <TouchableOpacity
+                  key={item.key}
                   style={[
-                    styles.iconBox,
-                    isSelected && styles.iconBoxSelected,
+                    styles.card,
+                    isSelected && styles.cardSelected,
                   ]}
+                  onPress={() => setSelected(item.key)}
+                  activeOpacity={0.7}
                 >
-                  <MaterialIcons
-                    name={item.icon as any}
-                    size={28}
-                    color={isSelected ? "#3B82F6" : "#6B7280"}
-                  />
+                  <View
+                    style={[
+                      styles.iconBox,
+                      isSelected && styles.iconBoxSelected,
+                    ]}
+                  >
+                    <MaterialIcons
+                      name={item.icon as any}
+                      size={28}
+                      color={isSelected ? "#3B82F6" : "#6B7280"}
+                    />
+                  </View>
+
+                  <Text style={styles.cardTitle}>{item.label}</Text>
+                  <Text style={styles.cardSub}>{item.sub}</Text>
+                </TouchableOpacity>
+              );
+            })}
+
+            {/* Other Animal */}
+            <TouchableOpacity 
+              style={[styles.card, styles.otherCard]}
+              activeOpacity={0.7}
+            >
+              <View style={styles.otherRow}>
+                <View style={styles.iconBox}>
+                  <MaterialIcons name="warning" size={28} color="#6B7280" />
                 </View>
-
-                <Text style={styles.cardTitle}>{item.label}</Text>
-                <Text style={styles.cardSub}>{item.sub}</Text>
-              </TouchableOpacity>
-            );
-          })}
-
-          {/* Other Animal */}
-          <TouchableOpacity style={[styles.card, { width: "100%" }]}>
-            <View style={styles.otherRow}>
-              <View style={styles.iconBox}>
-                <MaterialIcons name="warning" size={28} color="#6B7280" />
+                <View style={{ flex: 1, marginLeft: 12 }}>
+                  <Text style={styles.cardTitle}>
+                    Other Animal Bite
+                  </Text>
+                  <Text style={styles.cardSub}>
+                    Anya Pashu Dansha
+                  </Text>
+                </View>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={24}
+                  color="#D1D5DB"
+                />
               </View>
-              <View>
-                <Text style={styles.cardTitle}>
-                  Other Animal Bite
-                </Text>
-                <Text style={styles.cardSub}>
-                  Anya Pashu Dansha
-                </Text>
-              </View>
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color="#ccc"
-                style={{ marginLeft: "auto" }}
-              />
-            </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        {/* Bottom Button */}
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.continueBtn}
+            onPress={() => router.push(`/symptoms?type=${selected}`)}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.continueText}>
+              Continue Assessment
+            </Text>
+            <MaterialIcons
+              name="arrow-forward"
+              size={20}
+              color="#fff"
+              style={{ marginLeft: 8 }}
+            />
           </TouchableOpacity>
         </View>
-      </ScrollView>
-
-      {/* Bottom Button */}
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.continueBtn}
-          onPress={() =>
-            router.push(`/symptoms?type=${selected}`)
-          }
-        >
-          <Text style={styles.continueText}>
-            Continue Assessment
-          </Text>
-          <MaterialIcons
-            name="arrow-forward"
-            size={20}
-            color="#fff"
-            style={{ marginLeft: 8 }}
-          />
-        </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -119,23 +127,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F9FAF5",
-    paddingHorizontal: 20,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 100,
   },
   breadcrumb: {
-    marginTop: 20,
-    fontSize: 10,
+    marginTop: 8,
+    fontSize: 11,
     fontWeight: "700",
     color: "#9CA3AF",
+    letterSpacing: 0.5,
   },
   title: {
     fontSize: 28,
     fontWeight: "800",
     marginTop: 10,
+    color: "#1F2937",
   },
   subtitle: {
     color: "#6B7280",
     marginTop: 8,
-    marginBottom: 20,
+    marginBottom: 24,
+    fontSize: 14,
   },
   grid: {
     flexDirection: "row",
@@ -145,36 +159,47 @@ const styles = StyleSheet.create({
   card: {
     width: "48%",
     backgroundColor: "#fff",
-    borderRadius: 25,
-    padding: 20,
-    marginBottom: 15,
+    borderRadius: 20,
+    padding: 18,
+    marginBottom: 14,
     alignItems: "center",
     borderWidth: 2,
     borderColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 2,
   },
   cardSelected: {
     borderColor: "#3B82F6",
     backgroundColor: "#EFF6FF",
   },
   iconBox: {
-    width: 55,
-    height: 55,
-    borderRadius: 18,
+    width: 56,
+    height: 56,
+    borderRadius: 16,
     backgroundColor: "#F3F4F6",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 12,
   },
   iconBoxSelected: {
     backgroundColor: "#DBEAFE",
   },
   cardTitle: {
     fontWeight: "700",
+    fontSize: 15,
+    color: "#1F2937",
+    marginBottom: 2,
   },
   cardSub: {
     fontSize: 12,
     color: "#9CA3AF",
     fontStyle: "italic",
+  },
+  otherCard: {
+    width: "100%",
   },
   otherRow: {
     flexDirection: "row",
@@ -184,20 +209,29 @@ const styles = StyleSheet.create({
   footer: {
     position: "absolute",
     bottom: 0,
-    width: "100%",
+    left: 0,
+    right: 0,
     padding: 20,
     backgroundColor: "#F9FAF5",
+    borderTopWidth: 1,
+    borderTopColor: "#E5E7EB",
   },
   continueBtn: {
     backgroundColor: "#C65F3F",
     padding: 18,
-    borderRadius: 20,
+    borderRadius: 16,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#C65F3F",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
   },
   continueText: {
     color: "#fff",
     fontWeight: "700",
+    fontSize: 16,
   },
 });
