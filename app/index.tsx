@@ -7,7 +7,7 @@ export default function Splash() {
 
   useEffect(() => {
     setTimeout(() => {
-      router.replace("/identity");
+      router.replace("/home");
     }, 2000);
   }, []);
 
