@@ -1,12 +1,13 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+
 import { useState } from "react";
 import {
-    Button,
-    ScrollView,
-    StyleSheet,
-    Switch,
-    Text,
-    View,
+  Button,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
 } from "react-native";
 
 const snakeSymptoms = [
@@ -20,6 +21,7 @@ const snakeSymptoms = [
 export default function Symptoms() {
   const { type } = useLocalSearchParams();
   const [selected, setSelected] = useState<{ [key: string]: boolean }>({});
+  const router = useRouter();
 
   const symptoms = type === "snake" ? snakeSymptoms : [];
 
@@ -41,7 +43,23 @@ export default function Symptoms() {
         </View>
       ))}
 
-      <Button title="Generate Summary" onPress={() => {}} />
+      <Button
+        title="Generate Summary"
+        onPress={() => {
+          const selectedSymptoms = Object.keys(selected).filter(
+            (key) => selected[key]
+          );
+
+          router.push({
+            pathname: "/summary",
+            params: {
+              type,
+              symptoms: JSON.stringify(selectedSymptoms),
+            },
+          });
+        }}
+      />
+
     </ScrollView>
   );
 }
