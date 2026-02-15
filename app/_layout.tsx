@@ -29,6 +29,11 @@ export default function RootLayout() {
         name="bite"
         options={{ title: "Bite Type" }}
       />
+
+      <Stack.Screen
+        name="toxicFood"
+        options={{ title: "Toxic Food" }}
+      />
       <Stack.Screen
         name="symptoms"
         options={{ title: "Symptoms" }}

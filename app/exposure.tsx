@@ -38,7 +38,10 @@ export default function Exposure() {
       </TouchableOpacity>
 
       {/* Toxic Food Card */}
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity 
+        style={styles.card}
+        onPress={() => router.push("/toxicFood")}
+      >
         <View style={[styles.iconBox, { backgroundColor: "#DDF3E4" }]}>
           <MaterialIcons name="restaurant" size={28} color="#2E7D32" />
         </View>
