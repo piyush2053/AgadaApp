@@ -51,6 +51,15 @@ export default function RootLayout() {
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="home" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="cases"
+        options={{
+          title: "Saved Cases",
+          headerStyle: { backgroundColor: "#F1F3E1" },
+          headerTintColor: "#C45E3D",
+          headerTitleStyle: { fontWeight: "700" },
+        }}
+      />
 
       <Stack.Screen
         name="identity"
