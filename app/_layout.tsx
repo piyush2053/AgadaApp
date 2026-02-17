@@ -62,6 +62,16 @@ export default function RootLayout() {
       />
 
       <Stack.Screen
+        name="terms"
+        options={{
+          title: "Terms & Conditions",
+          headerStyle: { backgroundColor: "#F1F3E1" },
+          headerTintColor: "#C45E3D",
+          headerTitleStyle: { fontWeight: "700" },
+        }}
+      />
+
+      <Stack.Screen
         name="identity"
         options={{ title: "Patient Information", headerRight: () => <ProgressHeader /> }}
       />

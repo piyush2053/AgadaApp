@@ -96,7 +96,23 @@ export default function Home() {
         <View style={styles.cardSection}>
           <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push("/identity")}
+            // onPress={() => router.push("/identity")}
+            onPress={() => router.push({ pathname: "/identity", params: { role: "Doctor" } })}
+            activeOpacity={0.7}
+          >
+            <View style={[styles.iconCircle, { backgroundColor: "#DDF3E4" }]}>
+              <MaterialIcons name="medical-information" size={22} color="#2D5A27" />
+            </View>
+            <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>Doctor / Professional Use</Text>
+              <Text style={styles.cardSub}>Clinical evaluation tools</Text>
+            </View>
+            <MaterialIcons name="chevron-right" size={22} color="#D1D5DB" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.card}
+            // onPress={() => router.push("/identity")}
+            onPress={() => router.push({ pathname: "/identity", params: { role: "Patient" } })}
             activeOpacity={0.7}
           >
             <View style={[styles.iconCircle, { backgroundColor: "#FDEAD7" }]}>
@@ -108,18 +124,18 @@ export default function Home() {
             </View>
             <MaterialIcons name="chevron-right" size={22} color="#D1D5DB" />
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push("/identity")}
+            // onPress={() => router.push("/identity")}
+            onPress={() => router.push({ pathname: "/identity", params: { role: "Student" } })}
             activeOpacity={0.7}
           >
-            <View style={[styles.iconCircle, { backgroundColor: "#DDF3E4" }]}>
-              <MaterialIcons name="medical-information" size={22} color="#2D5A27" />
+            <View style={[styles.iconCircle, { backgroundColor: "#FDEAD7" }]}>
+              <MaterialIcons name="school" size={22} color="#C45E3D" />
             </View>
             <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Doctor / Professional Use</Text>
-              <Text style={styles.cardSub}>Clinical evaluation tools</Text>
+              <Text style={styles.cardTitle}>Student / Self Diagnosis</Text>
+              <Text style={styles.cardSub}>Assess symptoms and toxic exposure</Text>
             </View>
             <MaterialIcons name="chevron-right" size={22} color="#D1D5DB" />
           </TouchableOpacity>
@@ -216,9 +232,22 @@ export default function Home() {
           activeOpacity={0.8}
         >
           <MaterialIcons name="add-circle-outline" size={20} color="#fff" />
-          <Text style={styles.primaryButtonText}>Start New Diagnosis</Text>
+          <Text style={styles.primaryButtonText}>Start New Diagnosiss</Text>
           <MaterialIcons name="arrow-forward" size={20} color="#fff" />
         </TouchableOpacity>
+
+        {/* ── Terms & Conditions ───────────── */}
+        <TouchableOpacity
+          style={styles.tncLink}
+          activeOpacity={0.7}
+          onPress={() => {
+            router.push("/terms"); // if you have a screen
+            console.log("Open Terms & Conditions");
+          }}
+        >
+          <Text style={styles.tncText}>Terms & Conditions</Text>
+        </TouchableOpacity>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -319,4 +348,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
   },
   primaryButtonText: { color: "#fff", fontWeight: "700", fontSize: 16 },
+    tncLink: {
+    marginTop: 16,
+    alignItems: "center",
+    paddingVertical: 12,
+  },
+  tncText: {
+    color: "#6B7280", // subtle grey
+    fontSize: 13,
+    fontWeight: "600",
+    textDecorationLine: "underline",
+  }
 });

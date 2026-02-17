@@ -1,5 +1,6 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+
 import {
   KeyboardAvoidingView,
   Platform,
@@ -17,7 +18,7 @@ import { saveDraft } from "./utils/StorageService";
 export default function Identity() {
   const router = useRouter();
 
-  const [role, setRole] = useState("Doctor");
+  // const [role, setRole] = useState("Doctor");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
@@ -59,6 +60,17 @@ export default function Identity() {
     router.push("/exposure");
   };
 
+  const { role: initialRole } = useLocalSearchParams<{ role?: string }>();
+  const [role, setRole] = useState<string>("Doctor"); // default if nothing passed
+
+  useEffect(() => {
+    if (initialRole === "Doctor" || initialRole === "Patient" || initialRole === "Student") {
+      setRole(initialRole);
+    }
+  }, [initialRole]);
+
+
+
   return (
     <SafeAreaView style={styles.container} edges={["bottom"]}>
       <KeyboardAvoidingView
@@ -75,11 +87,19 @@ export default function Identity() {
           {/* Record Origin */}
           <Text style={styles.label}>Record Origin</Text>
           <View style={styles.segment}>
-            {["Doctor", "Student", "Patient"].map((item) => (
-              <TouchableOpacity key={item} style={[styles.segmentItem, role === item && styles.segmentActive]} onPress={() => setRole(item)} activeOpacity={0.7}>
-                <Text style={[styles.segmentText, role === item && styles.segmentTextActive]}>{item}</Text>
+            {["Doctor", "Patient", "Student"].map((item) => (
+              <TouchableOpacity
+                key={item}
+                style={[styles.segmentItem, role === item && styles.segmentActive]}
+                onPress={() => setRole(item)}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.segmentText, role === item && styles.segmentTextActive]}>
+                  {item}
+                </Text>
               </TouchableOpacity>
             ))}
+
           </View>
 
           {/* Full Name */}
