@@ -1,22 +1,22 @@
 import { Stack, usePathname } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
-// Progress indicator component
 function ProgressHeader() {
   const pathname = usePathname();
-  
-  // Define progress steps
+
   const steps = [
-    { path: "/identity", step: 1, total: 5, label: "Patient Info" },
-    { path: "/exposure", step: 2, total: 5, label: "Exposure Type" },
-    { path: "/bite", step: 3, total: 5, label: "Organism" },
-    { path: "/toxicFood", step: 3, total: 5, label: "Food Type" },
-    { path: "/symptoms", step: 4, total: 5, label: "Symptoms" },
-    { path: "/summary", step: 5, total: 5, label: "Summary" },
+    { path: "/identity", step: 1, total: 6, label: "Patient Info" },
+    { path: "/exposure", step: 2, total: 6, label: "Exposure Type" },
+    { path: "/bite", step: 3, total: 6, label: "Organism" },
+    { path: "/toxicFood", step: 3, total: 6, label: "Food Type" },
+    { path: "/externalContact", step: 3, total: 6, label: "External" },
+    { path: "/questionnaire", step: 3, total: 6, label: "Questionnaire" },
+    { path: "/virruddhaAahara", step: 3, total: 6, label: "Virruddha" },
+    { path: "/symptoms", step: 4, total: 6, label: "Symptoms" },
+    { path: "/summary", step: 6, total: 6, label: "Summary" },
   ];
 
-  const currentStep = steps.find(s => s.path === pathname);
-  
+  const currentStep = steps.find((s) => s.path === pathname);
   if (!currentStep) return null;
 
   return (
@@ -44,90 +44,58 @@ export default function RootLayout() {
     <Stack
       screenOptions={{
         headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#F1F3E1",
-        },
+        headerStyle: { backgroundColor: "#F1F3E1" },
         headerTintColor: "#C45E3D",
-        headerTitleStyle: {
-          fontWeight: "700",
-        },
+        headerTitleStyle: { fontWeight: "700" },
       }}
     >
-      {/* Splash */}
       <Stack.Screen name="index" options={{ headerShown: false }} />
-
-      {/* Landing Screen */}
       <Stack.Screen name="home" options={{ headerShown: false }} />
 
-      {/* Main Flow with Progress */}
       <Stack.Screen
         name="identity"
-        options={{
-          title: "Patient Information",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Patient Information", headerRight: () => <ProgressHeader /> }}
       />
       <Stack.Screen
         name="exposure"
-        options={{
-          title: "Exposure Type",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Exposure Type", headerRight: () => <ProgressHeader /> }}
       />
       <Stack.Screen
         name="bite"
-        options={{
-          title: "Bite Assessment",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Bite Assessment", headerRight: () => <ProgressHeader /> }}
       />
       <Stack.Screen
         name="toxicFood"
-        options={{
-          title: "Toxic Food",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Toxic Food", headerRight: () => <ProgressHeader /> }}
+      />
+      <Stack.Screen
+        name="externalContact"
+        options={{ title: "External Contact", headerRight: () => <ProgressHeader /> }}
+      />
+      <Stack.Screen
+        name="questionnaire"
+        options={{ title: "Visha Questionnaire", headerRight: () => <ProgressHeader /> }}
+      />
+      <Stack.Screen
+        name="virruddhaAahara"
+        options={{ title: "Virruddha Aahara", headerRight: () => <ProgressHeader /> }}
       />
       <Stack.Screen
         name="symptoms"
-        options={{
-          title: "Symptom Assessment",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Symptom Assessment", headerRight: () => <ProgressHeader /> }}
       />
       <Stack.Screen
         name="summary"
-        options={{
-          title: "Clinical Summary",
-          headerRight: () => <ProgressHeader />,
-        }}
+        options={{ title: "Clinical Summary", headerRight: () => <ProgressHeader /> }}
       />
     </Stack>
   );
 }
 
 const styles = StyleSheet.create({
-  progressContainer: {
-    alignItems: "center",
-    marginRight: 15,
-  },
-  progressBar: {
-    flexDirection: "row",
-    gap: 6,
-    marginBottom: 4,
-  },
-  progressDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#D1D5DB",
-  },
-  progressDotActive: {
-    backgroundColor: "#C45E3D",
-  },
-  progressText: {
-    fontSize: 10,
-    color: "#6B7280",
-    fontWeight: "600",
-  },
+  progressContainer: { alignItems: "center", marginRight: 15 },
+  progressBar: { flexDirection: "row", gap: 5, marginBottom: 3 },
+  progressDot: { width: 7, height: 7, borderRadius: 3.5, backgroundColor: "#D1D5DB" },
+  progressDotActive: { backgroundColor: "#C45E3D" },
+  progressText: { fontSize: 9, color: "#6B7280", fontWeight: "600" },
 });
