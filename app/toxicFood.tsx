@@ -80,7 +80,7 @@ export default function ToxicFood() {
             >
               <View style={styles.otherRow}>
                 <View style={styles.iconBox}>
-                  <MaterialIcons name="warning" size={28} color="#6B7280" />
+                  <MaterialIcons name="fastfood" size={28} color="#6B7280" />
                 </View>
                 <View style={{ flex: 1, marginLeft: 12 }}>
                   <Text style={styles.cardTitle}>

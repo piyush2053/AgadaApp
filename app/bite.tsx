@@ -1,4 +1,4 @@
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -11,12 +11,12 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const organisms = [
-  { key: "snake", label: "Snake", sub: "Sarpa Dansha", icon: "pest-control-rodent" },
-  { key: "scorpion", label: "Scorpion", sub: "Vruschika Dansha", icon: "bug-report" },
-  { key: "spider", label: "Spider", sub: "Luta Dansha", icon: "category" },
-  { key: "insect", label: "Insect", sub: "Keeta Dansha", icon: "flutter-dash" },
-  { key: "dog", label: "Dog", sub: "Shwana Dansha", icon: "pets" },
-  { key: "rat", label: "Rat", sub: "Mushika Dansha", icon: "mouse" },
+  { key: "snake", label: "Snake", sub: "Sarpa Dansha", icon: "snake" },
+  { key: "scorpion", label: "Scorpion", sub: "Vruschika Dansha", icon: "spider" },
+  { key: "spider", label: "Spider", sub: "Luta Dansha", icon: "spider" },
+  { key: "insect", label: "Insect", sub: "Keeta Dansha", icon: "bug" },
+  { key: "dog", label: "Dog", sub: "Shwana Dansha", icon: "dog" },
+  { key: "rat", label: "Rat", sub: "Mushika Dansha", icon: "rodent" },
 ];
 
 const snakeSubTypes = [
@@ -24,7 +24,7 @@ const snakeSubTypes = [
     key: "cobra",
     label: "Darvikara",
     sub: "Cobra (Naja sp.)",
-    icon: "pest-control-rodent",
+    icon: "snake",
     description: "Neurotoxic + cytotoxic. Causes hood spread, ptosis, paralysis.",
     color: "#EF4444",
     bgColor: "#FEE2E2",
@@ -33,7 +33,7 @@ const snakeSubTypes = [
     key: "viper",
     label: "Mandali",
     sub: "Viper (Vipera sp.)",
-    icon: "warning",
+    icon: "snake",
     description: "Hemotoxic. Causes severe local swelling, bleeding, coagulopathy.",
     color: "#D97706",
     bgColor: "#FEF3C7",
@@ -42,7 +42,7 @@ const snakeSubTypes = [
     key: "krait",
     label: "Rajimanta",
     sub: "Krait (Bungarus sp.)",
-    icon: "dangerous",
+    icon: "snake",
     description: "Neurotoxic. Minimal local signs, descending paralysis, often nocturnal bite.",
     color: "#7C3AED",
     bgColor: "#EDE9FE",
@@ -104,7 +104,7 @@ export default function Bite() {
                   activeOpacity={0.7}
                 >
                   <View style={[styles.snakeIconBox, { backgroundColor: isSelected ? item.color : "#F3F4F6" }]}>
-                    <MaterialIcons
+                    <MaterialCommunityIcons
                       name={item.icon as any}
                       size={28}
                       color={isSelected ? "#fff" : "#6B7280"}
@@ -177,9 +177,14 @@ export default function Bite() {
                   activeOpacity={0.7}
                 >
                   <View style={[styles.iconBox, isSelected && styles.iconBoxSelected]}>
-                    <MaterialIcons
+                    {/* <MaterialIcons
                       name={item.icon as any}
                       size={28}
+                      color={isSelected ? "#C45E3D" : "#6B7280"}
+                    /> */}
+                    <MaterialCommunityIcons
+                      name={item.icon as any}
+                      size={20}
                       color={isSelected ? "#C45E3D" : "#6B7280"}
                     />
                   </View>
@@ -202,7 +207,7 @@ export default function Bite() {
             >
               <View style={styles.otherRow}>
                 <View style={[styles.iconBox, selected === "animal" && styles.iconBoxSelected]}>
-                  <MaterialIcons name="warning" size={28} color={selected === "animal" ? "#C45E3D" : "#6B7280"} />
+                  <MaterialIcons name="pets" size={28} color={selected === "animal" ? "#C45E3D" : "#6B7280"} />
                 </View>
                 <View style={{ flex: 1, marginLeft: 12 }}>
                   <Text style={styles.cardTitle}>Other Animal Bite</Text>
