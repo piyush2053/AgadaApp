@@ -53,16 +53,16 @@ export default function Exposure() {
       bgColor: "#F3E8FF",
       iconColor: "#7C3AED",
     },
-    {
-      key: "virruddha",
-      route: "/virruddhaAahara",
-      title: "Virruddha Aahara",
-      titleSanskrit: "Incompatible Food Scoring",
-      description: "Frequency-based scoring of incompatible food combinations causing chronic toxicity.",
-      icon: "warning-amber",
-      bgColor: "#FEF9C3",
-      iconColor: "#CA8A04",
-    },
+    // {
+    //   key: "virruddha",
+    //   route: "/virruddhaAahara",
+    //   title: "Virruddha Aahara",
+    //   titleSanskrit: "Incompatible Food Scoring",
+    //   description: "Frequency-based scoring of incompatible food combinations causing chronic toxicity.",
+    //   icon: "warning-amber",
+    //   bgColor: "#FEF9C3",
+    //   iconColor: "#CA8A04",
+    // },
   ];
 
   return (

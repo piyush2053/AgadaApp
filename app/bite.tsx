@@ -226,7 +226,7 @@ export default function Bite() {
             activeOpacity={0.8}
           >
             <Text style={styles.continueText}>
-              {selected === "snake" ? "Select Snake Type →" : "Continue Assessment"}
+              {selected === "snake" ? "Select Snake Type" : "Continue Assessment"}
             </Text>
             <MaterialIcons
               name={selected === "snake" ? "arrow-forward" : "arrow-forward"}
