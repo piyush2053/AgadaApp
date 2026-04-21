@@ -67,7 +67,7 @@ export default function Home() {
             <MaterialIcons name="medical-services" size={36} color="#fff" />
           </View>
           <View style={{ flex: 1, marginLeft: 14 }}>
-            <Text style={styles.appName}>Agada Tantra</Text>
+            <Text style={styles.appName}>AGADA SANJEEVINI</Text>
             <Text style={styles.appSubtitle}>Parikshika</Text>
           </View>
           <TouchableOpacity
@@ -232,8 +232,63 @@ export default function Home() {
           activeOpacity={0.8}
         >
           <MaterialIcons name="add-circle-outline" size={20} color="#fff" />
-          <Text style={styles.primaryButtonText}>Start New Diagnosiss</Text>
+          <Text style={styles.primaryButtonText}>Start New Diagnosis</Text>
           <MaterialIcons name="arrow-forward" size={20} color="#fff" />
+        </TouchableOpacity>
+
+        {/* ── Ad Banner ────────────────────── */}
+        <TouchableOpacity
+          style={styles.adBanner}
+          activeOpacity={0.85}
+          onPress={() => {
+            import("react-native").then(({ Linking }) =>
+              Linking.openURL("https://samchhubballi.org/")
+            );
+          }}
+        >
+          {/* Top accent bar */}
+          <View style={styles.adTopBar}>
+            <MaterialIcons name="school" size={14} color="#fff" />
+            <Text style={styles.adTopBarText}>SPONSORED</Text>
+          </View>
+
+          {/* Main content */}
+          <View style={styles.adBody}>
+            <View style={styles.adLogoBox}>
+              <MaterialIcons name="local-hospital" size={28} color="#2D5A27" />
+            </View>
+            <View style={styles.adTextBlock}>
+              <Text style={styles.adCollegeName}>Sanjeevini Ayurveda</Text>
+              <Text style={styles.adCollegeSub}>Medical College & Hospital, Hubballi</Text>
+              <View style={styles.adTagRow}>
+                {["NEET-UG", "60 Seats", "AYUSH"].map((tag) => (
+                  <View key={tag} style={styles.adTag}>
+                    <Text style={styles.adTagText}>{tag}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+
+          {/* Features row */}
+          <View style={styles.adFeatures}>
+            {[
+              { icon: "library-books", label: "12,000+ Books" },
+              { icon: "science", label: "Modern Labs" },
+              { icon: "bed", label: "60-Bed Hospital" },
+            ].map((f) => (
+              <View key={f.label} style={styles.adFeatureItem}>
+                <MaterialIcons name={f.icon as any} size={14} color="#2D5A27" />
+                <Text style={styles.adFeatureText}>{f.label}</Text>
+              </View>
+            ))}
+          </View>
+
+          {/* CTA */}
+          <View style={styles.adCTA}>
+            <Text style={styles.adCTAText}>Apply Now →</Text>
+            <Text style={styles.adCTAUrl}>samchhubballi.org  •  836-3531302</Text>
+          </View>
         </TouchableOpacity>
 
         {/* ── Terms & Conditions ───────────── */}
@@ -354,9 +409,93 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   tncText: {
-    color: "#6B7280", // subtle grey
+    color: "#6B7280",
     fontSize: 13,
     fontWeight: "600",
     textDecorationLine: "underline",
-  }
+  },
+
+  // Ad Banner
+  adBanner: {
+    borderRadius: 18,
+    overflow: "hidden",
+    backgroundColor: "#fff",
+    marginBottom: 16,
+    shadowColor: "#2D5A27",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    elevation: 5,
+    borderWidth: 1,
+    marginTop: 20,
+    borderColor: "#D1FAE5",
+  },
+  adTopBar: {
+    backgroundColor: "#2D5A27",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+  },
+  adTopBarText: {
+    color: "#fff",
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 1.5,
+  },
+  adBody: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 14,
+    gap: 12,
+  },
+  adLogoBox: {
+    width: 52,
+    height: 52,
+    borderRadius: 14,
+    backgroundColor: "#DDF3E4",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  adTextBlock: { flex: 1 },
+  adCollegeName: {
+    fontSize: 15,
+    fontWeight: "800",
+    color: "#1F2937",
+    marginBottom: 2,
+  },
+  adCollegeSub: {
+    fontSize: 11,
+    color: "#6B7280",
+    marginBottom: 6,
+  },
+  adTagRow: { flexDirection: "row", gap: 6 },
+  adTag: {
+    backgroundColor: "#FEF3C7",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 6,
+  },
+  adTagText: { fontSize: 10, fontWeight: "700", color: "#D97706" },
+  adFeatures: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingHorizontal: 14,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F3F4F6",
+  },
+  adFeatureItem: { flexDirection: "row", alignItems: "center", gap: 4 },
+  adFeatureText: { fontSize: 11, color: "#374151", fontWeight: "600" },
+  adCTA: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    backgroundColor: "#F0FDF4",
+  },
+  adCTAText: { fontSize: 13, fontWeight: "800", color: "#2D5A27" },
+  adCTAUrl: { fontSize: 11, color: "#6B7280", fontWeight: "500" },
 });

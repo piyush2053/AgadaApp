@@ -5,7 +5,9 @@ import * as Sharing from "expo-sharing";
 import { useEffect, useState } from "react";
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   ScrollView,
   StyleSheet,
@@ -33,6 +35,8 @@ export default function Summary() {
     severityPercentage,
     caseId,
     readonly,
+    consumptionTime,
+    consumptionQty,
   } = useLocalSearchParams();
 
   const router = useRouter();
@@ -52,6 +56,8 @@ export default function Summary() {
   );
 
   const isReadonly = readonly === "true";
+  const resolvedConsumptionTime = (consumptionTime as string) || "";
+  const resolvedConsumptionQty = (consumptionQty as string) || "";
 
   useEffect(() => {
     if (caseId) {
@@ -96,7 +102,7 @@ export default function Summary() {
       spider: "Spider Bite (Luta)",
       dog: "Dog Bite (Shwana)",
       rat: "Rat Bite (Mushika)",
-      animal: "Animal Bite (Pashu Dansha)",
+      animal: "Animal Bite (Pashu damsha)",
       gara_visha: "Gara Visha Assessment",
       dushi_visha: "Dushi Visha Assessment",
       virruddha_aahara: "Virruddha Aahara Scoring",
@@ -134,72 +140,72 @@ export default function Summary() {
   } => {
     const details: Record<string, any> = {
       cobra: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Snake Bite — Cobra",  subcategorySanskrit: "Sarpa Dansha — Darvikara",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Snake Bite — Cobra",  subcategorySanskrit: "Sarpa damsha — Darvikara",
         description: "Neurotoxic + cytotoxic envenomation. Causes hood spread, ptosis, descending paralysis, and local tissue necrosis.",
         toxicityProfile: "Neurotoxic, Cytotoxic",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Snake (Sarpa)", "Species → Cobra / Darvikara (Naja sp.)"],
         icon: "🐍",
       },
       viper: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Snake Bite — Viper",  subcategorySanskrit: "Sarpa Dansha — Mandali",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Snake Bite — Viper",  subcategorySanskrit: "Sarpa damsha — Mandali",
         description: "Hemotoxic envenomation. Causes severe local swelling, haemorrhage, coagulopathy, and tissue destruction.",
         toxicityProfile: "Hemotoxic, Coagulopathic",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Snake (Sarpa)", "Species → Viper / Mandali (Vipera sp.)"],
         icon: "🐍",
       },
       krait: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Snake Bite — Krait",  subcategorySanskrit: "Sarpa Dansha — Rajimanta",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Snake Bite — Krait",  subcategorySanskrit: "Sarpa damsha — Rajimanta",
         description: "Neurotoxic envenomation. Minimal local signs, progressive descending paralysis, often nocturnal bite.",
         toxicityProfile: "Neurotoxic (post-synaptic)",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Snake (Sarpa)", "Species → Krait / Rajimanta (Bungarus sp.)"],
         icon: "🐍",
       },
       scorpion: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Scorpion Sting",      subcategorySanskrit: "Vruschika Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Scorpion Sting",      subcategorySanskrit: "Vruschika damsha",
         description: "Venom contains neurotoxins causing pain, paresthesia, autonomic dysfunction, and in severe cases cardiovascular collapse.",
         toxicityProfile: "Neurotoxic, Cardiotoxic",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Scorpion (Vruschika)"],
         icon: "🦂",
       },
       insect: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Insect Bite / Sting", subcategorySanskrit: "Keeta Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Insect Bite / Sting", subcategorySanskrit: "Keeta damsha",
         description: "Local reaction from insect venom or allergic response. May cause anaphylaxis in sensitized individuals.",
         toxicityProfile: "Allergenic, Local irritant",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Insect (Keeta)"],
         icon: "🐛",
       },
       spider: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Spider Bite",         subcategorySanskrit: "Luta Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Spider Bite",         subcategorySanskrit: "Luta damsha",
         description: "Neurotoxic or necrotic venom depending on species. Local tissue damage with possible systemic involvement.",
         toxicityProfile: "Neurotoxic / Necrotic",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Spider (Luta)"],
         icon: "🕷️",
       },
       dog: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Dog Bite",            subcategorySanskrit: "Shwana Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Dog Bite",            subcategorySanskrit: "Shwana damsha",
         description: "Risk of rabies, bacterial infection, and local trauma. Rabies prophylaxis protocol must be initiated.",
         toxicityProfile: "Infectious (Rabies risk), Bacterial",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Dog (Shwana)"],
         icon: "🐕",
       },
       rat: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Rat Bite",            subcategorySanskrit: "Mushika Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Rat Bite",            subcategorySanskrit: "Mushika damsha",
         description: "Risk of rat-bite fever, leptospirosis, and local infection. Wound care and prophylaxis essential.",
         toxicityProfile: "Infectious, Bacterial",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Rat (Mushika)"],
         icon: "🐀",
       },
       animal: {
-        category: "Bite / Sting",           categorySanskrit: "Dansha Visha",
-        subcategory: "Other Animal Bite",   subcategorySanskrit: "Anya Pashu Dansha",
+        category: "Bite / Sting",           categorySanskrit: "damsha Visha",
+        subcategory: "Other Animal Bite",   subcategorySanskrit: "Anya Pashu damsha",
         description: "Unspecified animal bite. Assess for envenomation, infection risk, and rabies exposure based on species.",
         toxicityProfile: "Variable — species dependent",
         pathway: ["Exposure Type → Bite / Sting", "Organism → Other Animal (Pashu)"],
@@ -373,7 +379,7 @@ export default function Summary() {
     const sevDesc = resolvedLevel === "Severe Complicated"
       ? "CRITICAL — Immediate emergency intervention required. Hospital admission mandatory."
       : resolvedLevel === "Alarming"
-      ? "HIGH ALERT — Urgent hospital admission needed. Close monitoring essential."
+      ? "HIGH ALERT — Urgent attention needed. Close monitoring essential."
       : resolvedLevel === "Moderate"
       ? "MODERATE — Hospital observation and active treatment required."
       : "MILD — Outpatient care with 24-hour follow-up recommended.";
@@ -774,6 +780,30 @@ export default function Summary() {
     </div>`;
     })()}
 
+    <!-- ── Intake Details ── -->
+    ${(resolvedConsumptionTime || resolvedConsumptionQty) ? `
+    <div class="section">
+      <div class="section-title">Intake Details</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        ${resolvedConsumptionTime ? `
+        <div style="display:flex;align-items:center;gap:8px;background:#F1F8F4;border:1px solid #DDF3E4;border-radius:10px;padding:10px 16px;">
+          <span style="font-size:16px;">🕐</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.3px;">TIME OF CONSUMPTION</div>
+            <div style="font-size:16px;font-weight:800;color:#1F2937;margin-top:2px;">${resolvedConsumptionTime}</div>
+          </div>
+        </div>` : ""}
+        ${resolvedConsumptionQty ? `
+        <div style="display:flex;align-items:center;gap:8px;background:#F1F8F4;border:1px solid #DDF3E4;border-radius:10px;padding:10px 16px;">
+          <span style="font-size:16px;">⚖️</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.3px;">QUANTITY CONSUMED</div>
+            <div style="font-size:16px;font-weight:800;color:#1F2937;margin-top:2px;">${resolvedConsumptionQty}</div>
+          </div>
+        </div>` : ""}
+      </div>
+    </div>` : ""}
+
     <!-- ── Chief Complaint ── -->
     ${identity?.mainComplaint ? `
     <div class="section">
@@ -934,7 +964,7 @@ export default function Summary() {
               </View>
               <Text style={[styles.severityDesc, { color }]}>
                 {resolvedLevel === "Severe Complicated" && "🚨 Critical — Immediate emergency intervention required"}
-                {resolvedLevel === "Alarming" && "⚠️ High — Urgent hospital admission needed"}
+                {resolvedLevel === "Alarming" && "⚠️ High — Urgent attention needed. Close monitoring essential."}
                 {resolvedLevel === "Moderate" && "⚡ Moderate — Hospital observation and treatment required"}
                 {resolvedLevel === "Mild" && "✅ Mild — Outpatient care with 24hr follow-up"}
               </Text>
@@ -944,13 +974,21 @@ export default function Summary() {
             {identity && (
               <View style={styles.card}>
                 <Text style={styles.cardLabel}>PATIENT IDENTITY</Text>
+
+                {/* Name + role */}
                 <Text style={styles.patientName}>{identity.name || "Patient Name Not Recorded"}</Text>
+                {identity.role ? (
+                  <View style={[styles.roleBadge]}>
+                    <Text style={styles.roleBadgeText}>{identity.role}</Text>
+                  </View>
+                ) : null}
+
+                {/* Row 1: Age, Gender, Marital Status */}
                 <View style={styles.identityGrid}>
                   {[
                     { label: "Age", value: identity.age ? `${identity.age} yrs` : "—" },
                     { label: "Gender", value: identity.gender || "—" },
-                    { label: "Admission", value: identity.admissionType || "—" },
-                    { label: "Date", value: identity.dateOfAdmission || "—" },
+                    { label: "Marital Status", value: identity.maritalStatus || "—" },
                   ].map((item) => (
                     <View key={item.label} style={styles.identityItem}>
                       <Text style={styles.identityItemLabel}>{item.label}</Text>
@@ -958,6 +996,60 @@ export default function Summary() {
                     </View>
                   ))}
                 </View>
+
+                {/* Row 2: Occupation, Socioeconomic Status */}
+                <View style={styles.identityGrid}>
+                  {[
+                    { label: "Occupation", value: identity.occupation || "—" },
+                    { label: "Socioeconomic Status", value: identity.socioStatus || "—" },
+                  ].map((item) => (
+                    <View key={item.label} style={styles.identityItem}>
+                      <Text style={styles.identityItemLabel}>{item.label}</Text>
+                      <Text style={styles.identityItemValue}>{item.value}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                {/* Address */}
+                {identity.address ? (
+                  <View style={styles.fullField}>
+                    <Text style={styles.identityItemLabel}>Address</Text>
+                    <Text style={styles.identityItemValue}>{identity.address}</Text>
+                  </View>
+                ) : null}
+
+                {/* Row 3: Admission Type, Date, OPD/IPD */}
+                <View style={styles.identityGrid}>
+                  {[
+                    { label: "Admission Type", value: identity.admissionType || "—" },
+                    { label: "Date of Admission", value: identity.dateOfAdmission || "—" },
+                  ].map((item) => (
+                    <View key={item.label} style={styles.identityItem}>
+                      <Text style={styles.identityItemLabel}>{item.label}</Text>
+                      <Text style={styles.identityItemValue}>{item.value}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                {/* OPD / IPD */}
+                {(identity.opdNumber || identity.ipdNumber) ? (
+                  <View style={styles.identityGrid}>
+                    {identity.opdNumber ? (
+                      <View style={styles.identityItem}>
+                        <Text style={styles.identityItemLabel}>OPD Number</Text>
+                        <Text style={styles.identityItemValue}>{identity.opdNumber}</Text>
+                      </View>
+                    ) : null}
+                    {identity.ipdNumber ? (
+                      <View style={styles.identityItem}>
+                        <Text style={styles.identityItemLabel}>IPD Number</Text>
+                        <Text style={styles.identityItemValue}>{identity.ipdNumber}</Text>
+                      </View>
+                    ) : null}
+                  </View>
+                ) : null}
+
+                {/* Allergy + Previous bite */}
                 {identity.allergies ? (
                   <View style={styles.allergyBadge}>
                     <MaterialIcons name="warning" size={13} color="#D97706" />
@@ -978,6 +1070,22 @@ export default function Summary() {
               <Text style={styles.cardLabel}>EXPOSURE CLASSIFICATION</Text>
               <Text style={styles.exposureType}>{getTypeLabel(resolvedType)}</Text>
               <Text style={styles.timestamp}>{new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" })}</Text>
+              {(resolvedConsumptionTime || resolvedConsumptionQty) && (
+                <View style={styles.intakeRow}>
+                  {resolvedConsumptionTime ? (
+                    <View style={styles.intakePill}>
+                      <MaterialIcons name="access-time" size={12} color="#2E7D32" />
+                      <Text style={styles.intakePillText}>{resolvedConsumptionTime}</Text>
+                    </View>
+                  ) : null}
+                  {resolvedConsumptionQty ? (
+                    <View style={styles.intakePill}>
+                      <MaterialIcons name="straighten" size={12} color="#2E7D32" />
+                      <Text style={styles.intakePillText}>{resolvedConsumptionQty}</Text>
+                    </View>
+                  ) : null}
+                </View>
+              )}
             </View>
 
             {/* Symptoms */}
@@ -1004,6 +1112,22 @@ export default function Summary() {
               </View>
             ) : null}
 
+            {/* Associated Complaints */}
+            {identity?.associatedComplaints ? (
+              <View style={styles.card}>
+                <Text style={styles.cardLabel}>ASSOCIATED COMPLAINTS</Text>
+                <Text style={styles.complaintText}>{identity.associatedComplaints}</Text>
+              </View>
+            ) : null}
+
+            {/* History of Present Illness */}
+            {identity?.history ? (
+              <View style={styles.card}>
+                <Text style={styles.cardLabel}>HISTORY OF PRESENT ILLNESS</Text>
+                <Text style={styles.complaintText}>{identity.history}</Text>
+              </View>
+            ) : null}
+
             {/* Nidana */}
             {identity?.nidana ? (
               <View style={styles.card}>
@@ -1026,6 +1150,18 @@ export default function Summary() {
                 textAlignVertical="top"
               />
             </View>
+            {/* Ad Banner */}
+            <TouchableOpacity
+              activeOpacity={0.85}
+              onPress={() => Linking.openURL("https://samchhubballi.org/")}
+            >
+              <Image
+                source={require("../assets/images/Adbanner2.jpg")}
+                style={styles.adBannerImage}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+
           </ScrollView>
 
           {/* Footer */}
@@ -1092,11 +1228,28 @@ const styles = StyleSheet.create({
   identityItem: { backgroundColor: "#F9FAFB", borderRadius: 10, padding: 10, minWidth: "45%" },
   identityItemLabel: { fontSize: 10, fontWeight: "700", color: "#9CA3AF" },
   identityItemValue: { fontSize: 14, fontWeight: "700", color: "#1F2937", marginTop: 2 },
+  roleBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#FFF4EE", borderWidth: 1, borderColor: "#FDEAD7",
+    paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20, marginBottom: 12,
+  },
+  roleBadgeText: { fontSize: 12, fontWeight: "700", color: "#C45E3D" },
+  fullField: {
+    backgroundColor: "#F9FAFB", borderRadius: 10, padding: 10,
+    marginBottom: 10,
+  },
   allergyBadge: { flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: "#FEF3C7", padding: 8, borderRadius: 10, marginTop: 4 },
   allergyText: { fontSize: 12, color: "#D97706", fontWeight: "600" },
   prevBiteBadge: { flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: "#EDE9FE", padding: 8, borderRadius: 10, marginTop: 6 },
   prevBiteText: { fontSize: 12, color: "#7C3AED", fontWeight: "600" },
   exposureType: { fontSize: 16, fontWeight: "700", color: "#1F2937", marginBottom: 4 },
+  intakeRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 8 },
+  intakePill: {
+    flexDirection: "row", alignItems: "center", gap: 5,
+    backgroundColor: "#F1F8F4", borderWidth: 1, borderColor: "#DDF3E4",
+    paddingHorizontal: 10, paddingVertical: 5, borderRadius: 20,
+  },
+  intakePillText: { fontSize: 12, fontWeight: "700", color: "#2E7D32" },
   timestamp: { fontSize: 12, color: "#6B7280" },
   symptomRow: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: "#F1F5F9" },
   symptomDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: "#C45E3D" },
@@ -1118,4 +1271,7 @@ const styles = StyleSheet.create({
   newCaseBtnText: { fontWeight: "700", color: "#2563EB", fontSize: 14 },
   pdfBtn: { backgroundColor: "#1F2937", padding: 16, borderRadius: 14, flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 8, shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 8, elevation: 6 },
   pdfText: { color: "#fff", fontWeight: "700", fontSize: 15 },
+  adBannerImage: {
+    width: "100%",
+  },
 });

@@ -2,7 +2,9 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 
 import {
+  Image,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   ScrollView,
   StyleSheet,
@@ -79,6 +81,16 @@ export default function Identity() {
         keyboardVerticalOffset={100}
       >
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <TouchableOpacity
+            activeOpacity={0.85}
+            onPress={() => Linking.openURL("https://samchhubballi.org/")}
+          >
+            <Image
+              source={require("../assets/images/Adbanner1.jpg")}
+              style={styles.adBannerImage}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
           <Text style={styles.title}>Preliminary Data</Text>
           <Text style={styles.subtitle}>
             Fill in the patient's information to begin the Agada Tantra toxicological assessment.
@@ -272,4 +284,7 @@ const styles = StyleSheet.create({
   toggleTextActive: { color: "#fff" },
   primaryButton: { backgroundColor: "#C45E3D", padding: 18, borderRadius: 14, alignItems: "center", marginTop: 32, shadowColor: "#C45E3D", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 6 },
   primaryButtonText: { color: "#fff", fontWeight: "700", fontSize: 16 },
+  adBannerImage: {
+    width: "100%",
+  },
 });

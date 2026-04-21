@@ -57,7 +57,7 @@ export function calculateSeverity(
       color: "#EA580C",
       bgColor: "#FFEDD5",
       description: "High severity. Urgent medical attention required.",
-      recommendation: "Urgent hospital admission. Initiate Agada Tantra protocol. Monitor vitals continuously.",
+      recommendation: "Urgent attention needed. Initiate Agada Tantra protocol. Monitor vitals continuously.",
     };
   } else if (percentage >= 50) {
     return {

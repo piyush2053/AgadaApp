@@ -22,7 +22,7 @@ export default function Splash() {
           <MaterialIcons name="medical-services" size={48} color="#fff" />
         </View>
         
-        <Text style={styles.title}>AGADA APP</Text>
+        <Text style={styles.title}>AGADA SANJEEVINI</Text>
         <Text style={styles.subtitle}>Ayurvedic Toxicology Clinical Tool</Text>
         
         <ActivityIndicator 

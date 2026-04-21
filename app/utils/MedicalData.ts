@@ -25,8 +25,8 @@ export type FrequencyOption = "Never" | "Rarely" | "Occasionally" | "Frequently"
 export const cobraSymptoms: Symptom[] = [
   { id: "cobra_01", title: "Local Swelling", titleSanskrit: "Shotha", category: "Local" },
   { id: "cobra_02", title: "Pain at Bite Site", titleSanskrit: "Vedana", category: "Local" },
-  { id: "cobra_03", title: "Fang Marks", titleSanskrit: "Danda Chihn", category: "Local" },
-  { id: "cobra_04", title: "Tissue Necrosis", titleSanskrit: "Mamsa Kshaya", category: "Local" },
+  { id: "cobra_03", title: "Fang Marks", titleSanskrit: "Damsha Sthana", category: "Local" },
+  { id: "cobra_04", title: "Tissue Necrosis", titleSanskrit: "Mamsa Nashta", category: "Local" },
   { id: "cobra_05", title: "Blister Formation", titleSanskrit: "Sphota", category: "Local" },
   { id: "cobra_06", title: "Ptosis (Drooping Eyelids)", titleSanskrit: "Pakshma Pata", category: "Neurological" },
   { id: "cobra_07", title: "Diplopia (Double Vision)", titleSanskrit: "Dvandva Drishti", category: "Neurological" },
@@ -61,7 +61,7 @@ export const viperSymptoms: Symptom[] = [
   { id: "viper_02", title: "Massive Swelling", titleSanskrit: "Maha Shotha", category: "Local" },
   { id: "viper_03", title: "Hemorrhagic Blister", titleSanskrit: "Rakta Sphota", category: "Local" },
   { id: "viper_04", title: "Tissue Necrosis", titleSanskrit: "Mamsa Nashta", category: "Local" },
-  { id: "viper_05", title: "Bleeding from Bite Site", titleSanskrit: "Danstha Rakta Sruti", category: "Local" },
+  { id: "viper_05", title: "Bleeding from Bite Site", titleSanskrit: "Danstha Sthana   Rakta Sruti", category: "Local" },
   { id: "viper_06", title: "Gum Bleeding", titleSanskrit: "Danta Mamsa Sruti", category: "Hemorrhagic" },
   { id: "viper_07", title: "Nasal Bleeding (Epistaxis)", titleSanskrit: "Nasa Rakta Sruti", category: "Hemorrhagic" },
   { id: "viper_08", title: "Blood in Urine (Hematuria)", titleSanskrit: "Rakta Mutra", category: "Hemorrhagic" },
@@ -73,15 +73,15 @@ export const viperSymptoms: Symptom[] = [
   { id: "viper_14", title: "Shock", titleSanskrit: "Vipada", category: "Cardiovascular" },
   { id: "viper_15", title: "Oliguria / Anuria", titleSanskrit: "Mutra Alpa / Kshaya", category: "Urological" },
   { id: "viper_16", title: "Renal Failure Signs", titleSanskrit: "Vrikka Vikara", category: "Urological" },
-  { id: "viper_17", title: "Coagulopathy (Clotting Failure)", titleSanskrit: "Rakta Skandana Doshita", category: "Hemorrhagic" },
+  { id: "viper_17", title: "Coagulopathy (Clotting Failure)", titleSanskrit: "Rakta Skandana Dosha", category: "Hemorrhagic" },
   { id: "viper_18", title: "DIC Signs (Disseminated Intravascular Coagulation)", titleSanskrit: "Sarvangi Rakta Vikara", category: "Hemorrhagic" },
 ];
 
 export const kraitSymptoms: Symptom[] = [
   { id: "krait_01", title: "Minimal or No Local Swelling", titleSanskrit: "Alpa Shotha", category: "Local" },
-  { id: "krait_02", title: "Faint Fang Marks", titleSanskrit: "Sukshma Chihn", category: "Local" },
+  { id: "krait_02", title: "Faint Fang Marks", titleSanskrit: "Alpa damsha  Chihn", category: "Local" },
   { id: "krait_03", title: "Abdominal Cramps", titleSanskrit: "Udara Shula", category: "Gastrointestinal" },
-  { id: "krait_04", title: "Progressive Descending Paralysis", titleSanskrit: "Upagami Sthamba", category: "Neurological" },
+  { id: "krait_04", title: "Progressive Descending Paralysis", titleSanskrit: "Adhogata Sharira Sthambha", category: "Neurological" },
   { id: "krait_05", title: "Ptosis", titleSanskrit: "Pakshma Pata", category: "Neurological" },
   { id: "krait_06", title: "Respiratory Failure", titleSanskrit: "Shwasa Nasha", category: "Respiratory" },
   { id: "krait_07", title: "Death (if untreated)", titleSanskrit: "Mrityu", category: "General" },
@@ -93,7 +93,7 @@ export const kraitSymptoms: Symptom[] = [
 
 export const scorpionSymptoms: Symptom[] = [
   { id: "scorp_01", title: "Intense Local Pain", titleSanskrit: "Teevra Daha", category: "Local" },
-  { id: "scorp_02", title: "Local Swelling", titleSanskrit: "Desha Shotha", category: "Local" },
+  { id: "scorp_02", title: "Local Swelling", titleSanskrit: "Damsha Sthana Shotha", category: "Local" },
   { id: "scorp_03", title: "Excessive Sweating", titleSanskrit: "Sveda Adhikya", category: "Autonomic" },
   { id: "scorp_04", title: "Hypertension", titleSanskrit: "Rakta Chapa Vriddhi", category: "Cardiovascular" },
   { id: "scorp_05", title: "Tachycardia", titleSanskrit: "Nadi Vegata", category: "Cardiovascular" },
@@ -106,9 +106,9 @@ export const scorpionSymptoms: Symptom[] = [
 // ─────────────────────────────────────────────
 
 export const insectSymptoms: Symptom[] = [
-  { id: "insect_01", title: "Local Pain and Swelling", titleSanskrit: "Danstha Shotha", category: "Local" },
+  { id: "insect_01", title: "Local Pain and Swelling", titleSanskrit: "Damsha sthana ruja and shotha", category: "Local" },
   { id: "insect_02", title: "Urticaria / Hives", titleSanskrit: "Sheetapitta", category: "Allergic" },
-  { id: "insect_03", title: "Anaphylaxis", titleSanskrit: "Sarvanga Visarpa", category: "Allergic" },
+  { id: "insect_03", title: "Anaphylaxis", titleSanskrit: "Teevra asahatva", category: "Allergic" },
   { id: "insect_04", title: "Bronchospasm", titleSanskrit: "Shwasa Sankocha", category: "Respiratory" },
   { id: "insect_05", title: "Hypotension / Shock", titleSanskrit: "Vipada", category: "Cardiovascular" },
 ];
@@ -133,7 +133,7 @@ export const dogSymptoms: Symptom[] = [
 // ─────────────────────────────────────────────
 
 export const ratSymptoms: Symptom[] = [
-  { id: "rat_01", title: "Puncture Wound", titleSanskrit: "Chhedana Vrana", category: "Local" },
+  { id: "rat_01", title: "Puncture Wound", titleSanskrit: "Cheda vrana", category: "Local" },
   { id: "rat_02", title: "Local Swelling", titleSanskrit: "Shotha", category: "Local" },
   { id: "rat_03", title: "Intermittent Fever", titleSanskrit: "Vishamajwara", category: "Systemic" },
   { id: "rat_04", title: "Chills", titleSanskrit: "Shita Kampana", category: "Systemic" },
@@ -152,7 +152,7 @@ export const ratSymptoms: Symptom[] = [
   { id: "rat_17", title: "Splenomegaly", titleSanskrit: "Pliha Vriddhi", category: "Systemic" },
   { id: "rat_18", title: "Hepatomegaly", titleSanskrit: "Yakrit Vriddhi", category: "Systemic" },
   { id: "rat_19", title: "Conjunctival Hemorrhage", titleSanskrit: "Netra Rakta", category: "Ocular" },
-  { id: "rat_20", title: "Pulmonary Hemorrhage", titleSanskrit: "Phupphusa Rakta", category: "Respiratory" },
+  { id: "rat_20", title: "Pulmonary Hemorrhage", titleSanskrit: "Rakta srava in phupphusa", category: "Respiratory" },
 ];
 
 // ─────────────────────────────────────────────
@@ -164,7 +164,7 @@ export const animalBiteSymptoms: Symptom[] = [
   { id: "animal_02", title: "Bleeding", titleSanskrit: "Rakta Sruti", category: "Local" },
   { id: "animal_03", title: "Swelling", titleSanskrit: "Shotha", category: "Local" },
   { id: "animal_04", title: "Pain", titleSanskrit: "Vedana", category: "Local" },
-  { id: "animal_05", title: "Infection Signs", titleSanskrit: "Purna Vrana", category: "Local" },
+  { id: "animal_05", title: "Infection Signs", titleSanskrit: "Dushta vrana", category: "Local" },
   { id: "animal_06", title: "Fever", titleSanskrit: "Jwara", category: "Systemic" },
   { id: "animal_07", title: "Lymphadenopathy", titleSanskrit: "Granthi Shotha", category: "Systemic" },
   { id: "animal_08", title: "Septicemia Signs", titleSanskrit: "Rakta Dusthi", category: "Systemic" },
@@ -185,7 +185,7 @@ export const animalBiteSymptoms: Symptom[] = [
   { id: "animal_23", title: "Paralysis", titleSanskrit: "Sthamba", category: "Neurological" },
   { id: "animal_24", title: "Vision Changes", titleSanskrit: "Drishti Vikara", category: "Ocular" },
   { id: "animal_25", title: "Urinary Changes", titleSanskrit: "Mutra Vikara", category: "Urological" },
-  { id: "animal_26", title: "Clotting Issues", titleSanskrit: "Skandana Vikara", category: "Hemorrhagic" },
+  { id: "animal_26", title: "Clotting Issues", titleSanskrit: "Rakta skandana dushti", category: "Hemorrhagic" },
   { id: "animal_27", title: "Loss of Consciousness", titleSanskrit: "Murcha", category: "Neurological" },
 ];
 
@@ -208,7 +208,7 @@ export const externalCategories: ExternalCategory[] = [
     labelSanskrit: "Savisha Vastradharana",
     description: "Contact with poison-contaminated clothing or fabric",
     symptoms: [
-      { id: "ev_01", title: "Skin Redness", titleSanskrit: "Tvak Rakta", category: "Dermatological" },
+      { id: "ev_01", title: "Skin Redness", titleSanskrit: "Rakta varnata of Twak", category: "Dermatological" },
       { id: "ev_02", title: "Burning Sensation", titleSanskrit: "Daha", category: "Dermatological" },
       { id: "ev_03", title: "Itching", titleSanskrit: "Kandu", category: "Dermatological" },
       { id: "ev_04", title: "Rash / Urticaria", titleSanskrit: "Kotha", category: "Dermatological" },
@@ -223,7 +223,7 @@ export const externalCategories: ExternalCategory[] = [
       { id: "em_01", title: "Facial Burning", titleSanskrit: "Mukha Daha", category: "Local" },
       { id: "em_02", title: "Swelling of Face", titleSanskrit: "Mukha Shotha", category: "Local" },
       { id: "em_03", title: "Eye Irritation", titleSanskrit: "Netra Raga", category: "Ocular" },
-      { id: "em_04", title: "Blurred Vision", titleSanskrit: "Drishti Dhundha", category: "Ocular" },
+      { id: "em_04", title: "Blurred Vision", titleSanskrit: "Drushti dosha", category: "Ocular" },
       { id: "em_05", title: "Headache", titleSanskrit: "Shirah Shula", category: "Neurological" },
     ],
   },
@@ -236,7 +236,7 @@ export const externalCategories: ExternalCategory[] = [
       { id: "es_01", title: "Diffuse Skin Irritation", titleSanskrit: "Sarvangi Tvak Kopa", category: "Dermatological" },
       { id: "es_02", title: "Hair Loss", titleSanskrit: "Kesha Pata", category: "Dermatological" },
       { id: "es_03", title: "Nail Discoloration", titleSanskrit: "Nakha Vikara", category: "Dermatological" },
-      { id: "es_04", title: "Systemic Absorption Signs", titleSanskrit: "Sarira Vikara", category: "Systemic" },
+      { id: "es_04", title: "Systemic Absorption Signs", titleSanskrit: "Sarva shareera lakshanas", category: "Systemic" },
     ],
   },
   {
@@ -286,7 +286,7 @@ export const externalCategories: ExternalCategory[] = [
       { id: "el_01", title: "Local Burns", titleSanskrit: "Desha Dagdha", category: "Local" },
       { id: "el_02", title: "Skin Peeling", titleSanskrit: "Tvak Patana", category: "Dermatological" },
       { id: "el_03", title: "Abscess Formation", titleSanskrit: "Vidradhi", category: "Dermatological" },
-      { id: "el_04", title: "Systemic Toxicity", titleSanskrit: "Sarira Visha", category: "Systemic" },
+      { id: "el_04", title: "Systemic Toxicity", titleSanskrit: "Sarva shareera visha lakshana", category: "Systemic" },
     ],
   },
   {
@@ -298,7 +298,7 @@ export const externalCategories: ExternalCategory[] = [
       { id: "en_01", title: "Nasal Burning", titleSanskrit: "Nasa Daha", category: "Local" },
       { id: "en_02", title: "Nasal Bleeding", titleSanskrit: "Nasa Sruti", category: "Hemorrhagic" },
       { id: "en_03", title: "Severe Headache", titleSanskrit: "Teevra Shirah Shula", category: "Neurological" },
-      { id: "en_04", title: "Altered Consciousness", titleSanskrit: "Sanjnana Vikara", category: "Neurological" },
+      { id: "en_04", title: "Altered Consciousness", titleSanskrit: "Samgjna Vikara", category: "Neurological" },
     ],
   },
   {
@@ -323,7 +323,7 @@ export const externalCategories: ExternalCategory[] = [
       { id: "ep_02", title: "Dysphagia", titleSanskrit: "Grasana Kastha", category: "Gastrointestinal" },
       { id: "ep_03", title: "Vomiting", titleSanskrit: "Chhardi", category: "Gastrointestinal" },
       { id: "ep_04", title: "Abdominal Pain", titleSanskrit: "Udara Shula", category: "Gastrointestinal" },
-      { id: "ep_05", title: "Systemic Toxicity", titleSanskrit: "Sarira Visha Vikara", category: "Systemic" },
+      { id: "ep_05", title: "Systemic Toxicity", titleSanskrit: "Sarva shareera visha lakshana", category: "Systemic" },
     ],
   },
   {
@@ -408,6 +408,12 @@ export const virruddhaAaharaItems: VirruddhaItem[] = [
   { id: "va_08", food: "Banana + Milk", combination: "Kadali-Ksheera combination", sanskritName: "Kadali-Ksheera" },
   { id: "va_09", food: "Non-veg + Milk", combination: "Mamsa-Ksheera combination", sanskritName: "Mamsa-Ksheera" },
   { id: "va_10", food: "Sprouts + Milk", combination: "Ankurita Dhanya-Ksheera", sanskritName: "Ankura-Ksheera" },
+  { id: "va_11", food: "Fast Food + Soft Drinks / Carbonated Drinks", combination: "Fried food with carbonated beverages", sanskritName: "Abhishyandi-Amla Pana" },
+  { id: "va_12", food: "Deep Fried Food + Cold Drinks", combination: "Hot fried food with cold beverages", sanskritName: "Ushna-Sheeta Viruddha" },
+  { id: "va_13", food: "Food with Additives / Preservatives", combination: "Chemically preserved or artificially coloured food", sanskritName: "Kritrima Dravya Yukta Anna" },
+  { id: "va_14", food: "Processed / Reheated / Repeatedly Cooked Food", combination: "Leftover or repeatedly heated food", sanskritName: "Paryushita-Punah Pakva Anna" },
+  { id: "va_15", food: "Eating Without Feeling Hungry", combination: "Consumption of food without natural hunger", sanskritName: "Ajirnashana / Abhojana Kale Bhojana" },
+  { id: "va_16", food: "Use of Gadgets While Eating", combination: "Screen/device use during meals — distracted eating", sanskritName: "Vikshipta Chitta Bhojana" },
 ];
 
 export const frequencyOptions: FrequencyOption[] = ["Never", "Rarely", "Occasionally", "Frequently", "Daily"];

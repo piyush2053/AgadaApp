@@ -100,7 +100,7 @@ export default function Questionnaire() {
         type: "virruddha_aahara",
         symptoms: JSON.stringify(positiveItems),
         presentCount: String(viruddhaFreqScore),
-        totalPossible: "40",
+        totalPossible: "64",
         severityLevel: viruddhaSeverity.level,
         severityPercentage: String(viruddhaSeverity.percentage.toFixed(1)),
       },

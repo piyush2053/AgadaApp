@@ -43,7 +43,7 @@ export default function VirruddhaAahara() {
         type: "virruddha_aahara",
         symptoms: JSON.stringify(positiveItems),
         presentCount: String(totalFrequencyScore),
-        totalPossible: "40",
+        totalPossible: "64",
         severityLevel: severity.level,
         severityPercentage: String(severity.percentage.toFixed(1)),
       },

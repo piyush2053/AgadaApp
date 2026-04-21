@@ -11,12 +11,12 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const organisms = [
-  { key: "snake", label: "Snake", sub: "Sarpa Dansha", icon: "snake" },
-  { key: "scorpion", label: "Scorpion", sub: "Vruschika Dansha", icon: "spider" },
-  { key: "spider", label: "Spider", sub: "Luta Dansha", icon: "spider" },
-  { key: "insect", label: "Insect", sub: "Keeta Dansha", icon: "bug" },
-  { key: "dog", label: "Dog", sub: "Shwana Dansha", icon: "dog" },
-  { key: "rat", label: "Rat", sub: "Mushika Dansha", icon: "rodent" },
+  { key: "snake", label: "Snake", sub: "Sarpa damsha", icon: "snake" },
+  { key: "scorpion", label: "Scorpion", sub: "Vruschika damsha", icon: "spider" },
+  { key: "spider", label: "Spider", sub: "Luta damsha", icon: "spider" },
+  { key: "insect", label: "Insect", sub: "Keeta damsha", icon: "bug" },
+  { key: "dog", label: "Dog", sub: "Shwana damsha", icon: "dog" },
+  { key: "rat", label: "Rat", sub: "Mushika damsha", icon: "rodent" },
 ];
 
 const snakeSubTypes = [
@@ -211,7 +211,7 @@ export default function Bite() {
                 </View>
                 <View style={{ flex: 1, marginLeft: 12 }}>
                   <Text style={styles.cardTitle}>Other Animal Bite</Text>
-                  <Text style={styles.cardSub}>Anya Pashu Dansha</Text>
+                  <Text style={styles.cardSub}>Anya Pashu damsha</Text>
                 </View>
                 <MaterialIcons name="chevron-right" size={24} color="#D1D5DB" />
               </View>

@@ -14,7 +14,7 @@ import { getSymptomsForType, Symptom } from "./utils/MedicalData";
 import { calculateSeverity, getSymptomGradeColor, getSymptomGradeLabel } from "./utils/SeverityEngine";
 
 export default function Symptoms() {
-  const { type } = useLocalSearchParams();
+  const { type, consumptionTime, consumptionQty } = useLocalSearchParams();
   const router = useRouter();
   const typeStr = (type as string) || "animal";
 
@@ -82,6 +82,8 @@ export default function Symptoms() {
         totalPossible: String(totalPossible),
         severityLevel: severityResult.level,
         severityPercentage: String(severityResult.percentage.toFixed(1)),
+        consumptionTime: (consumptionTime as string) || "",
+        consumptionQty: (consumptionQty as string) || "",
       },
     });
   };
@@ -95,6 +97,18 @@ export default function Symptoms() {
         >
           <Text style={styles.title}>Symptom Assessment</Text>
           <Text style={styles.typeLabel}>{getLabelForType(typeStr)}</Text>
+          {/* Intake details banner */}
+          {((consumptionTime as string) || (consumptionQty as string)) ? (
+            <View style={styles.intakeBanner}>
+              <MaterialIcons name="info-outline" size={15} color="#2E7D32" />
+              <Text style={styles.intakeBannerText}>
+                {consumptionTime ? `Time: ${consumptionTime}` : ""}
+                {consumptionTime && consumptionQty ? "  •  " : ""}
+                {consumptionQty ? `Quantity: ${consumptionQty}` : ""}
+              </Text>
+            </View>
+          ) : null}
+
           <Text style={styles.subtitle}>
             Toggle each symptom as Present or Absent. For present symptoms, grade severity from 1 (minimal) to 10 (critical).
           </Text>
@@ -312,6 +326,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
   },
+  intakeBanner: {
+    flexDirection: "row", alignItems: "center", gap: 8,
+    backgroundColor: "#F1F8F4",
+    borderWidth: 1, borderColor: "#DDF3E4",
+    borderRadius: 10, padding: 10,
+    marginBottom: 10,
+  },
+  intakeBannerText: { fontSize: 12, fontWeight: "700", color: "#2E7D32", flex: 1 },
   generateBtnDisabled: { backgroundColor: "#94A3B8", shadowOpacity: 0, elevation: 0 },
   generateText: { color: "#fff", fontWeight: "700", fontSize: 16 },
 });

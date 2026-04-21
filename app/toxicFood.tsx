@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -46,6 +47,23 @@ export default function ToxicFood() {
   // Toxic food selection
   const [selected, setSelected] = useState("mushroom");
 
+  // Time & quantity of consumption
+  const [consumptionTime, setConsumptionTime] = useState("");
+  const [consumptionQty, setConsumptionQty] = useState("");
+
+  // Time picker modal state
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [tempHour, setTempHour] = useState(12);
+  const [tempMinute, setTempMinute] = useState(0);
+  const [tempPeriod, setTempPeriod] = useState<"AM" | "PM">("AM");
+
+  const confirmTime = () => {
+    const h = tempHour === 12 ? (tempPeriod === "AM" ? 0 : 12) : (tempPeriod === "PM" ? tempHour + 12 : tempHour);
+    const display = `${String(tempHour).padStart(2, "0")}:${String(tempMinute).padStart(2, "0")} ${tempPeriod}`;
+    setConsumptionTime(display);
+    setShowTimePicker(false);
+  };
+
   // Tab toggle
   const [activeTab, setActiveTab] = useState<ActiveTab>("toxic");
 
@@ -64,7 +82,14 @@ export default function ToxicFood() {
   // ── Handlers ────────────────────────────────────────────────────────────────
 
   const handleToxicContinue = () => {
-    router.push(`/symptoms?type=${selected}`);
+    router.push({
+      pathname: "/symptoms",
+      params: {
+        type: selected,
+        consumptionTime,
+        consumptionQty,
+      },
+    });
   };
 
   const handleViruddhaContinue = () => {
@@ -81,7 +106,7 @@ export default function ToxicFood() {
         type: "virruddha_aahara",
         symptoms: JSON.stringify(positiveItems),
         presentCount: String(totalFrequencyScore),
-        totalPossible: "40",
+        totalPossible: "64",
         severityLevel: viruddhaSeverity.level,
         severityPercentage: String(viruddhaSeverity.percentage.toFixed(1)),
       },
@@ -203,6 +228,131 @@ export default function ToxicFood() {
                   </View>
                 </TouchableOpacity>
               </View>
+
+              {/* ── Time & Quantity ── */}
+              <View style={styles.intakeCard}>
+                <View style={styles.intakeHeader}>
+                  <MaterialIcons name="schedule" size={16} color="#2E7D32" />
+                  <Text style={styles.intakeTitle}>INTAKE DETAILS</Text>
+                </View>
+
+                {/* Time of consumption */}
+                <Text style={styles.intakeLabel}>Time of Consumption</Text>
+                <TouchableOpacity
+                  style={styles.timePickerBtn}
+                  onPress={() => setShowTimePicker(true)}
+                  activeOpacity={0.7}
+                >
+                  <MaterialIcons name="access-time" size={18} color={consumptionTime ? "#2E7D32" : "#9CA3AF"} />
+                  <Text style={[styles.timePickerText, consumptionTime ? { color: "#1F2937" } : {}]}>
+                    {consumptionTime || "Tap to set time"}
+                  </Text>
+                  {consumptionTime ? (
+                    <TouchableOpacity onPress={() => setConsumptionTime("")} activeOpacity={0.7}>
+                      <MaterialIcons name="close" size={16} color="#9CA3AF" />
+                    </TouchableOpacity>
+                  ) : (
+                    <MaterialIcons name="chevron-right" size={18} color="#D1D5DB" />
+                  )}
+                </TouchableOpacity>
+
+                {/* Quantity */}
+                <Text style={styles.intakeLabel}>Quantity / Amount Consumed</Text>
+                <View style={styles.qtyRow}>
+                  <TextInput
+                    style={styles.qtyInput}
+                    placeholder="e.g. 200ml, half a bowl, 3 pieces"
+                    placeholderTextColor="#9CA3AF"
+                    value={consumptionQty}
+                    onChangeText={setConsumptionQty}
+                  />
+                  {consumptionQty.length > 0 && (
+                    <TouchableOpacity style={styles.qtyClear} onPress={() => setConsumptionQty("")} activeOpacity={0.7}>
+                      <MaterialIcons name="close" size={16} color="#9CA3AF" />
+                    </TouchableOpacity>
+                  )}
+                </View>
+
+                {/* Quick chips */}
+                <View style={styles.chipRow}>
+                  {["Small amount", "Half portion", "Full portion", "Large amount"].map((chip) => (
+                    <TouchableOpacity
+                      key={chip}
+                      style={[styles.chip, consumptionQty === chip && styles.chipSelected]}
+                      onPress={() => setConsumptionQty(consumptionQty === chip ? "" : chip)}
+                      activeOpacity={0.7}
+                    >
+                      <Text style={[styles.chipText, consumptionQty === chip && styles.chipTextSelected]}>
+                        {chip}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+
+              {/* ── Inline Time Picker ── */}
+              {showTimePicker && (
+                <View style={styles.timePickerModal}>
+                  <Text style={styles.timePickerModalTitle}>Select Time of Consumption</Text>
+                  <View style={styles.timePickerRow}>
+                    {/* Hour */}
+                    <View style={styles.timeColumn}>
+                      <Text style={styles.timeColLabel}>HOUR</Text>
+                      <TouchableOpacity style={styles.timeArrow} onPress={() => setTempHour(h => h >= 12 ? 1 : h + 1)}>
+                        <MaterialIcons name="keyboard-arrow-up" size={22} color="#2E7D32" />
+                      </TouchableOpacity>
+                      <View style={styles.timeValueBox}>
+                        <Text style={styles.timeValue}>{String(tempHour).padStart(2, "0")}</Text>
+                      </View>
+                      <TouchableOpacity style={styles.timeArrow} onPress={() => setTempHour(h => h <= 1 ? 12 : h - 1)}>
+                        <MaterialIcons name="keyboard-arrow-down" size={22} color="#2E7D32" />
+                      </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.timeSeparator}>:</Text>
+
+                    {/* Minute */}
+                    <View style={styles.timeColumn}>
+                      <Text style={styles.timeColLabel}>MIN</Text>
+                      <TouchableOpacity style={styles.timeArrow} onPress={() => setTempMinute(m => m >= 55 ? 0 : m + 5)}>
+                        <MaterialIcons name="keyboard-arrow-up" size={22} color="#2E7D32" />
+                      </TouchableOpacity>
+                      <View style={styles.timeValueBox}>
+                        <Text style={styles.timeValue}>{String(tempMinute).padStart(2, "0")}</Text>
+                      </View>
+                      <TouchableOpacity style={styles.timeArrow} onPress={() => setTempMinute(m => m <= 0 ? 55 : m - 5)}>
+                        <MaterialIcons name="keyboard-arrow-down" size={22} color="#2E7D32" />
+                      </TouchableOpacity>
+                    </View>
+
+                    {/* AM / PM */}
+                    <View style={styles.timeColumn}>
+                      <Text style={styles.timeColLabel}>PERIOD</Text>
+                      <TouchableOpacity
+                        style={[styles.periodBtn, tempPeriod === "AM" && styles.periodBtnActive]}
+                        onPress={() => setTempPeriod("AM")}
+                      >
+                        <Text style={[styles.periodText, tempPeriod === "AM" && styles.periodTextActive]}>AM</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[styles.periodBtn, tempPeriod === "PM" && styles.periodBtnActive]}
+                        onPress={() => setTempPeriod("PM")}
+                      >
+                        <Text style={[styles.periodText, tempPeriod === "PM" && styles.periodTextActive]}>PM</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  <View style={styles.timePickerActions}>
+                    <TouchableOpacity style={styles.timePickerCancel} onPress={() => setShowTimePicker(false)} activeOpacity={0.7}>
+                      <Text style={styles.timePickerCancelText}>Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.timePickerConfirm} onPress={confirmTime} activeOpacity={0.8}>
+                      <Text style={styles.timePickerConfirmText}>Confirm Time</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
 
               {/* Info box */}
               <View style={[styles.infoBox, { borderColor: "#DDF3E4" }]}>
@@ -510,6 +660,113 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
   },
+  // ── Intake details card
+  intakeCard: {
+    backgroundColor: "#fff",
+    borderRadius: 18,
+    padding: 18,
+    marginTop: 4,
+    marginBottom: 14,
+    borderWidth: 1.5,
+    borderColor: "#DDF3E4",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  intakeHeader: {
+    flexDirection: "row", alignItems: "center", gap: 7, marginBottom: 14,
+  },
+  intakeTitle: {
+    fontSize: 11, fontWeight: "800", color: "#2E7D32", letterSpacing: 0.5,
+  },
+  intakeLabel: {
+    fontSize: 12, fontWeight: "700", color: "#374151", marginBottom: 8, marginTop: 4,
+  },
+  timePickerBtn: {
+    flexDirection: "row", alignItems: "center", gap: 10,
+    backgroundColor: "#F9FAFB", borderRadius: 12,
+    padding: 14, borderWidth: 1, borderColor: "#E5E7EB",
+    marginBottom: 14,
+  },
+  timePickerText: { flex: 1, fontSize: 14, color: "#9CA3AF", fontWeight: "600" },
+  qtyRow: {
+    flexDirection: "row", alignItems: "center",
+    backgroundColor: "#F9FAFB", borderRadius: 12,
+    borderWidth: 1, borderColor: "#E5E7EB",
+    marginBottom: 10, paddingRight: 12,
+  },
+  qtyInput: {
+    flex: 1, padding: 14, fontSize: 14, color: "#1F2937",
+  },
+  qtyClear: { padding: 4 },
+  chipRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4 },
+  chip: {
+    paddingHorizontal: 12, paddingVertical: 6,
+    borderRadius: 20, backgroundColor: "#F3F4F6",
+    borderWidth: 1, borderColor: "#E5E7EB",
+  },
+  chipSelected: { backgroundColor: "#DDF3E4", borderColor: "#2E7D32" },
+  chipText: { fontSize: 11, fontWeight: "700", color: "#6B7280" },
+  chipTextSelected: { color: "#2E7D32" },
+
+  // ── Inline time picker
+  timePickerModal: {
+    backgroundColor: "#fff",
+    borderRadius: 20, padding: 20,
+    marginBottom: 16,
+    borderWidth: 1.5, borderColor: "#DDF3E4",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1, shadowRadius: 10, elevation: 5,
+  },
+  timePickerModalTitle: {
+    fontSize: 14, fontWeight: "800", color: "#1F2937",
+    textAlign: "center", marginBottom: 20,
+  },
+  timePickerRow: {
+    flexDirection: "row", alignItems: "center",
+    justifyContent: "center", gap: 8, marginBottom: 20,
+  },
+  timeColumn: { alignItems: "center", gap: 6 },
+  timeColLabel: { fontSize: 9, fontWeight: "800", color: "#9CA3AF", letterSpacing: 0.5 },
+  timeArrow: {
+    width: 36, height: 36, borderRadius: 10,
+    backgroundColor: "#F1F8F4",
+    justifyContent: "center", alignItems: "center",
+  },
+  timeValueBox: {
+    width: 64, height: 52, borderRadius: 14,
+    backgroundColor: "#F1F8F4", borderWidth: 1.5, borderColor: "#DDF3E4",
+    justifyContent: "center", alignItems: "center",
+  },
+  timeValue: { fontSize: 26, fontWeight: "900", color: "#1F2937" },
+  timeSeparator: {
+    fontSize: 28, fontWeight: "900", color: "#2E7D32",
+    marginTop: 18,
+  },
+  periodBtn: {
+    width: 56, height: 36, borderRadius: 10,
+    backgroundColor: "#F3F4F6", borderWidth: 1, borderColor: "#E5E7EB",
+    justifyContent: "center", alignItems: "center",
+  },
+  periodBtnActive: { backgroundColor: "#2E7D32", borderColor: "#2E7D32" },
+  periodText: { fontSize: 13, fontWeight: "800", color: "#6B7280" },
+  periodTextActive: { color: "#fff" },
+  timePickerActions: { flexDirection: "row", gap: 10 },
+  timePickerCancel: {
+    flex: 1, padding: 14, borderRadius: 12,
+    borderWidth: 1.5, borderColor: "#E5E7EB",
+    alignItems: "center",
+  },
+  timePickerCancelText: { fontSize: 14, fontWeight: "700", color: "#6B7280" },
+  timePickerConfirm: {
+    flex: 2, padding: 14, borderRadius: 12,
+    backgroundColor: "#2E7D32", alignItems: "center",
+  },
+  timePickerConfirmText: { fontSize: 14, fontWeight: "700", color: "#fff" },
+
   continueBtnDisabled: { backgroundColor: "#94A3B8", shadowOpacity: 0, elevation: 0 },
   continueText: { color: "#fff", fontWeight: "700", fontSize: 16 },
 });

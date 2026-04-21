@@ -1,11 +1,11 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,7 +17,7 @@ export default function Exposure() {
       key: "bite",
       route: "/bite",
       title: "Bite / Sting",
-      titleSanskrit: "Dansha Visha",
+      titleSanskrit: "damsha Visha",
       description: "Animal bites, insect stings, snake envenomation. Includes Cobra, Viper, Krait, Scorpion, Dog, Rat.",
       icon: "bug-report",
       bgColor: "#FDEAD7",
@@ -26,7 +26,7 @@ export default function Exposure() {
     {
       key: "toxic-food",
       route: "/toxicFood",
-      title: "Toxic Food / Ingestion",
+      title: "Toxic Food / Viruddha Aahara",
       titleSanskrit: "Garavisha / Ahara Visha",
       description: "Ingested poisons, contaminated food, mushroom, chemical, pesticide, or spoiled food.",
       icon: "restaurant",
