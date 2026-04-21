@@ -20,7 +20,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.versablend.AgadaApp"
+      "package": "com.versablend.agadaapp"
     },
     "web": {
       "output": "static",
